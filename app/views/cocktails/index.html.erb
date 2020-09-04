@@ -1,22 +1,38 @@
-<h1>Cocktails</h1>
 
-<div class="container">
-  <ul class="list-group">
-    <% @cocktails.each do |cocktail| %>
-      <div>
-        <li class="list-group-item">
-          <%= link_to cocktail.name, cocktail_path(cocktail) %>
-          <%= link_to "♻️",
-                cocktail_path(cocktail),
-                method: :delete,
-                data: { confirm: "Are you sure?" } %>
+  <div class="mt-5 container">
+  <h1>Cocktails</h1>  <%= link_to "New Cocktail", new_cocktail_path, class: "btn btn-success" %>
 
-        </li>
 
+      <div class="row">
+        <% @cocktails.each do |cocktail| %>
+          <div class="col-12 col-md-4">
+            <div class="card" style="height: 450px">
+
+
+                  <%= cl_image_tag cocktail.photo.key, height: 300, width: 400, crop: :fill, class: "card-img-top" %>
+
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <%= cocktail.name%>
+                  </h5>
+
+                  <div class="card-text">
+                    <%= link_to "(Delete❌)",
+                          cocktail_path(cocktail),
+                          method: :delete,
+                          data: { confirm: "Are you sure?" } %>
+                          <br>
+                    <%= link_to "check recipe",cocktail_path(cocktail), class: "btn btn-primary"%>
+                  </div>
+                </div>
+
+          </div>
+            </div>
+
+        <% end %>
+
+  </div>
       </div>
 
-    <% end %>
-  </ul>
-</div>
 
-<%= link_to "New Cocktail", new_cocktail_path %>
+
